@@ -4,6 +4,8 @@ import com.dh.demo.common.Response;
 import com.dh.demo.domain.User;
 import com.dh.demo.jraexception.UserAlreadyExists;
 import com.dh.demo.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,26 +38,30 @@ public class UserController {
         return res;
     }
 
-    @RequestMapping(value = "/login/{user}/{password}", method = RequestMethod.GET)
-    @Produces
-    public Response login(  @PathVariable("user") String user,
-                            @PathVariable("password") String password){
+    @RequestMapping(value = "/login/{user}/{password}", method = RequestMethod.GET,produces = "application/json")
 
-        UserRequestDTO userDto = null;
-        User u = userService.getByID(user);
+    public String login(  @PathVariable("user") String user,
+                            @PathVariable("password") String password) throws JsonProcessingException {
+
+        UserRequestDTO userDto;
+        User u = userService.findByUserName(user);
+        res.setSuccess(false);
+        res.setResponseObject(null);
 
         if(null != u){
             if(u.getPassword().equals(password)){
+                userDto = new UserRequestDTO();
                 userDto.setUserName(u.getUserName());
                 userDto.setFirstName(u.getFirstName());
                 userDto.setLastName(u.getLastName());
                 userDto.setEmail(u.getEmail());
                 userDto.setPremium(u.isPremium());
+                res.setSuccess(true);
+                res.setResponseObject(userDto);
             }
         }
-        res.setSuccess(true);
-        res.setResponseObject(userDto);
-        return res;
+
+        return (new ObjectMapper().writeValueAsString(res));
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -7,6 +7,7 @@ import com.dh.demo.web.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,10 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    public User findByUserName(String userName){
+        return  userRepository.findByUserName(userName);
+    }
+
     public User getByID(String id){
         return userRepository.findOne(id);
     }
@@ -28,12 +33,13 @@ public class UserService {
 
     public List<User> getAllBut(String user){
         List<User> li = (List<User>)userRepository.findAll();
+        List<User> res = new ArrayList<User>();
         for(User u : li){
-            if(u.getUserName().equals(user)){
-                li.remove(u);
+            if(!u.getUserName().equals(user)){
+                res.add(u);
             }
         }
-        return li;
+        return res;
     }
 
     public void addUser(UserController.UserRequestDTO userDTO) throws UserAlreadyExists {
