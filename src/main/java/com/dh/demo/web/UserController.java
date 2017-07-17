@@ -56,6 +56,7 @@ public class UserController {
                 userDto.setLastName(u.getLastName());
                 userDto.setEmail(u.getEmail());
                 userDto.setPremium(u.isPremium());
+                userDto.setId(u.getId());
                 res.setSuccess(true);
                 res.setResponseObject(userDto);
             }
@@ -84,6 +85,7 @@ public class UserController {
 
     public static class UserRequestDTO {
 
+        private String id;
         private String firstName;
         private String lastName;
         private String email;
@@ -91,6 +93,14 @@ public class UserController {
         private String password;
         private String Status;
         private boolean isPremium;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public boolean isPremium() {
             return isPremium;

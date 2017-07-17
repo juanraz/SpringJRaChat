@@ -9,9 +9,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-/**
- * Created by jhonny on 6/16/2017.
- */
+
 @Controller
 public class CreateMessageWSController {
 

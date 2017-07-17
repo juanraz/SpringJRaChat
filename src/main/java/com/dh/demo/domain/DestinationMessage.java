@@ -16,6 +16,27 @@ public class DestinationMessage {
     @DBRef
     private User user;
 
+    @DBRef
+    private User otherUser;
+
+    private String status;
+
+    public User getOtherUser() {
+        return otherUser;
+    }
+
+    public void setOtherUser(User otherUser) {
+        this.otherUser = otherUser;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getId() {
         return id;
     }
