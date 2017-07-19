@@ -32,15 +32,40 @@ public class UserService {
     }
 
     public List<User> getAllBut(String user){
-        List<User> li = (List<User>)userRepository.findAll();
-        List<User> res = new ArrayList<User>();
+        List<User> li = (List<User>)userRepository.findAllBut(user);
+        /*List<User> res = new ArrayList<User>();
         for(User u : li){
-            if(!u.getUserName().equals(user)){
+            System.out.println(u.getId()+" "+user);
+            if(!u.getId().equals(user)){
                 res.add(u);
             }
-        }
-        return res;
+        }*/
+        return li;
     }
+
+    public void updateUser(UserController.UserRequestDTO userDTO) {
+
+        User user;
+        user = this.getByID(userDTO.getUserName());
+
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPassword((userDTO.getPassword()));
+        user.setPremium(userDTO.isPremium());
+
+        userRepository.save(user);
+    }
+
+    public void deleteUser(String userId) {
+
+        User user;
+        user = this.getByID(userId);
+        if(user!=null){
+            user.setStatus("removed");
+            userRepository.save(user);
+        }
+    }
+
 
     public void addUser(UserController.UserRequestDTO userDTO) throws UserAlreadyExists {
 

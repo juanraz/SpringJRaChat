@@ -50,6 +50,31 @@ public class MessageController {
         return res;
     }
 
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST, produces = "application/json")
+    public Response updateMessage(
+            @PathVariable("id") String id,
+            @RequestBody MessageRequestDTO message){
+        res.setSuccess(true);
+        messageService.updateMessage(id,message,false);
+        res.setResponseObject(null);
+
+        return res;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public Response deleteMessage(
+            @PathVariable("id") String id
+            ){
+        res.setSuccess(true);
+        MessageRequestDTO m = new MessageRequestDTO();
+        m.setMessage("*Message removed*");
+        messageService.updateMessage(id,m,true);
+        res.setResponseObject(null);
+
+        return res;
+    }
+
+
     public static class MessageRequestDTO{
         private String from;
         private String to;

@@ -14,8 +14,7 @@ public class Message {
     @Id
     private String id;
     private String content;
-    @DBRef
-    private Status status;
+    private String status;
     private Date creationDate;
     @DBRef
     private User user;
@@ -36,11 +35,11 @@ public class Message {
         this.content = content;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

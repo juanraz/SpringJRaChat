@@ -39,7 +39,6 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login/{user}/{password}", method = RequestMethod.GET,produces = "application/json")
-
     public String login(  @PathVariable("user") String user,
                             @PathVariable("password") String password) throws JsonProcessingException {
 
@@ -64,6 +63,23 @@ public class UserController {
 
         return (new ObjectMapper().writeValueAsString(res));
     }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Response updateUser(@RequestBody UserRequestDTO userDTO){
+        res.setSuccess(true);
+        res.setMessage("User updated.");
+            userService.updateUser(userDTO);
+            return res;
+    }
+
+    @RequestMapping(value = "/remove/{user}", method = RequestMethod.DELETE)
+    public Response removeUser(@PathVariable("user") String user){
+        res.setSuccess(true);
+        res.setMessage("User removed.");
+        userService.deleteUser(user);
+        return res;
+    }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public Response addUser(@RequestBody UserRequestDTO userDTO){

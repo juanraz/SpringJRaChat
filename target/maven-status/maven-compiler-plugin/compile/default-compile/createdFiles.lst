@@ -2,14 +2,16 @@ com\dh\demo\config\CorsFilter.class
 com\dh\demo\service\GroupService.class
 com\dh\demo\model\HelloMessage.class
 com\dh\demo\web\GroupController$GroupRequestDTO.class
+com\dh\demo\web\MessageController.class
 com\dh\demo\config\WebSocketConfig.class
 com\dh\demo\domain\Group.class
-com\dh\demo\web\CreateMessageWSController.class
+com\dh\demo\service\CounterService.class
 com\dh\demo\common\Response.class
 com\dh\demo\service\MessageService.class
 com\dh\demo\service\UserService.class
 com\dh\demo\web\MessageController$MessageRequestDTO.class
 com\dh\demo\repository\UserRepository.class
+com\dh\demo\web\CounterHandler.class
 com\dh\demo\service\DestinationMessageService.class
 com\dh\demo\domain\GroupUser.class
 com\dh\demo\web\UserController$UserRequestDTO.class

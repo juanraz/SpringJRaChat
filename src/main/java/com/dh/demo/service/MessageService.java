@@ -42,9 +42,8 @@ public class MessageService {
 
         createMessage(m);
 
-        Status s = null;
 
-        m.setStatus(s);
+        m.setStatus("created");
 
         dm.setUser(userService.getByID(from));
         dm.setOtherUser(userService.getByID(to));
@@ -69,6 +68,18 @@ public class MessageService {
         messageRepository.save(message);
     }
 
+    public void updateMessage(String id, MessageController.MessageRequestDTO message, boolean isDelete){
+        Message m = messageRepository.findOne(id);
+        if(!m.getContent().equals(message.getMessage())){
+            m.setContent(message.getMessage());
+            if(isDelete){
+                m.setStatus("deleted");
+            }else{
+                m.setStatus("update");
+            }
+            messageRepository.save(m);
+        }
+    }
 
 
 }
